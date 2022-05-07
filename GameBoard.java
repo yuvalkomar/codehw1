@@ -8,4 +8,8 @@ public class GameBoard {
         for(int i=0;i<99;i++)
             Board[i] = new Square(i+1);
     }
+
+    public Square getSquare(int squareNumber){
+        return this.Board[squareNumber-1];
+    }
 }

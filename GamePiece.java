@@ -9,19 +9,34 @@ public class GamePiece {
      */
     public GamePiece(String color) {
         if (color.equals("red")) {
-            piece_Color = Color.RED;
+            this.piece_Color = Color.RED;
         }
         if (color.equals("green")) {
-            piece_Color = Color.GREEN;
+            this.piece_Color = Color.GREEN;
         }
         if (color.equals("yellow")) {
-            piece_Color = Color.YELLOW;
+            this.piece_Color = Color.YELLOW;
         }
         if (color.equals("blue")) {
-            piece_Color = Color.BLUE;
+            this.piece_Color = Color.BLUE;
         }
         if (color.equals("orange")) {
-            piece_Color = Color.ORANGE;
+            this.piece_Color = Color.ORANGE;
         }
+    }
+
+    public String getPieceColor()
+    {
+        if (this.piece_Color == Color.RED)
+            return "red";
+        if (this.piece_Color == Color.GREEN)
+            return "green";
+        if (this.piece_Color == Color.YELLOW)
+            return "yellow";
+        if (this.piece_Color == Color.BLUE)
+            return "blue";
+        if (this.piece_Color == Color.ORANGE)
+            return "orange";
+        return null;
     }
 }

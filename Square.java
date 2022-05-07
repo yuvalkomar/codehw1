@@ -22,4 +22,12 @@ public class Square {
     public void setLadderStart(Ladder ladder){
         this.ladderStart = ladder;
     }
+
+    public Ladder getLadderStart(){
+        return this.ladderStart;
+    }
+
+    public Snake getSnakeHead(){
+        return this.snakeHead;
+    }
 }

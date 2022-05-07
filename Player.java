@@ -7,4 +7,14 @@ public class Player {
         this.name = PlayerName;
         this.piece = new GamePiece(PlayerPiece);
     }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getGamePieceColor()
+    {
+       return this.piece.getPieceColor();
+    }
 }
