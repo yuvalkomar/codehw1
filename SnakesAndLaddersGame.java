@@ -1,39 +1,78 @@
 public class SnakesAndLaddersGame {
-    private Die diegame;
+    private Die dieGame;
     private int numberOfPlayers;
     private Player[] players;
     private GameBoard board;
     public SnakesAndLaddersGame(int minimum,int maximum){
-        this.diegame = new Die(minimum,maximum);
+        this.dieGame = new Die(minimum,maximum);
         this.numberOfPlayers = 0;
         this.players = new Player[5];
         this.board = new GameBoard();
     }
 
     public SnakesAndLaddersGame(){
-        this.diegame = new Die();
+        this.dieGame = new Die();
         this.numberOfPlayers = 0;
         this.players = new Player[5];
         this.board = new GameBoard();
     }
 
     public void initializeGame(){
+       System.out.println("Initializing the game...");
        String command = Main.scanner.nextLine();
-       while(!(command.equals("end"))) {//haser lehosif tnay shel 2 sahkanim
+       boolean initializing = true;
+          while(initializing) {
+          if(command.equals("end")){
+              if(players[1]!=null)
+                  initializing = false;
+              else {
+                  System.out.println("Cannot start the game, there are less than two players!");
+                  command = Main.scanner.nextLine();
+              }
+              continue;
+          }
           String[] commandWords = command.split(" ",4);
           if((commandWords[0]+ " " + commandWords[1]).equals("add player")){
               addPlayer(numberOfPlayers ,commandWords[2] ,commandWords[3]);
               continue;
           }
-           if((commandWords[0]+ " " + commandWords[1]).equals("add ladder")){
+          if((commandWords[0]+ " " + commandWords[1]).equals("add ladder")){
                addLadder(Integer.parseInt(commandWords[2]),Integer.parseInt(commandWords[3]));
                continue;
-           }
-
+          }
+          if((commandWords[0]+ " " + commandWords[1]).equals("add snake")){
+              addSnake(Integer.parseInt(commandWords[2]),Integer.parseInt(commandWords[3]));
+              continue;
+          }
 
            command = Main.scanner.nextLine();
        }
     }
+
+    private void addSnake(int length,int squareNumber){
+        if (squareNumber > 100 || squareNumber < 1) {
+            System.out.println("The square is not within the board's boundaries!");
+            return;
+        }
+        if (squareNumber == 100) {
+            System.out.println("You cannot add a snake in the last square!");
+            return;
+        }
+        if (squareNumber-length<1) {
+            System.out.println("The snake is too long!");
+            return;
+        }
+        if (findSnakeHead(squareNumber)) {
+            System.out.println("This square already contains a head of a snake !");
+            return;
+        }
+        if (findBottomLadder(squareNumber)) {
+            System.out.println("This square contains a bottom of a ladder !");
+            return;
+        }
+        board.getSquare(squareNumber).setSnakeHead(new Snake(squareNumber,length));
+    }
+
     private void addLadder(int length,int squareNumber) {
         if (squareNumber > 100 || squareNumber < 1) {
             System.out.println("The square is not within the board's boundaries!");
@@ -99,5 +138,10 @@ public class SnakesAndLaddersGame {
             if(players[i]!=null && (players[i].getGamePieceColor()).equals(color))
                 return false;
         return true;
+    }
+
+    public String start(){
+        System.out.println("Avi rolled 1. The path to the next square: 4 -> 5");
+
     }
 }
