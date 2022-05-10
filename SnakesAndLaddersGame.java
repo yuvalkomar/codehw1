@@ -140,8 +140,48 @@ public class SnakesAndLaddersGame {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public String start(){
-        System.out.println("Avi rolled 1. The path to the next square: 4 -> 5");
+        int roundNumber = 0;
+        String playerPath;
+        Player winner = null;
+        while(winner == null) {
+            System.out.println("------------------------- Round number " + roundNumber + " -------------------------");
+            for(int i = 0; i <= numberOfPlayers-1; i++) {
+                playerPath = players[i].getSquareNum() + " -> ";
+                int roll = dieGame.roll();
+                players[i].moveSquareNum(roll);
+                playerPath = playerPath + players[i].getSquareNum();
+                boolean freeSquare = false;
+                while(!(freeSquare)) {
+                    Snake checkSnake = board.getSnakeHead(players[i].getSquareNum());
+                    if (checkSnake != null) {
+                        players[i].moveSquareNum(checkSnake.getSnakeLength());
+                        playerPath = playerPath + " -> " + players[i].getSquareNum();
+                    }
+                    Ladder checkLadder = board.getLadderStart(players[i].getSquareNum());
+                    if (checkLadder != null) {
+                        players[i].moveSquareNum(checkLadder.getLadderLength());
+                        playerPath = playerPath + " -> " + players[i].getSquareNum();
+                    }
+                    if(checkSnake == null && checkLadder == null)
+                        freeSquare = true;
+                    if(players[i].getSquareNum() == 100)
+                        winner = players[i];
 
+                }
+                System.out.println(players[i].getName() + " rolled " + roll +
+                        ". The path to the next square: " + playerPath);
+            }
+            System.out.println("board the on positions Players:");
+            for(int i = 0; i <= numberOfPlayers-1; i++) {
+                System.out.println(players[i].getName() + " is in square number " + players[i].getSquareNum());
+            }
+            roundNumber++;
+        }
+        return winner.getName();
     }
 }

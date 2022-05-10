@@ -2,6 +2,7 @@ public class Square {
     private int squareNum;
     private Snake snakeHead;
     private Ladder ladderStart;
+
     public Square(int squareNumber)
     {
         this.squareNum = squareNumber;

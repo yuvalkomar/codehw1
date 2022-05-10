@@ -7,5 +7,8 @@ public class Snake  {
         this.snakeLength = length;
     }
 
+    public int getSnakeLength(){
+        return -1 * this.snakeLength;
+    }
 
 }

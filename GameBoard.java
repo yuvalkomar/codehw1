@@ -12,4 +12,12 @@ public class GameBoard {
     public Square getSquare(int squareNumber){
         return this.Board[squareNumber-1];
     }
+
+    public Snake getSnakeHead(int squareNumber){
+        return this.Board[squareNumber-1].getSnakeHead();
+    }
+
+    public Ladder getLadderStart(int squareNumber){
+        return this.Board[squareNumber-1].getLadderStart();
+    }
 }

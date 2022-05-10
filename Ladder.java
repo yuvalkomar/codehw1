@@ -6,4 +6,7 @@ public class Ladder {
         this.squareNumber = ladderPosition;
         this.ladderLength = length;
     }
+    public int getLadderLength(){
+        return this.ladderLength;
+    }
 }
